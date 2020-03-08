@@ -1,0 +1,27 @@
+.Authorization form {
+    width: 300px;
+    padding: 20px;
+}
+
+.Authorization form Button {
+   margin-top: 10px;
+}
+
+.Authorization {
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Note {
+    height: 65vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Note form {
+    padding: 50px;
+    width: 1000px;
+}

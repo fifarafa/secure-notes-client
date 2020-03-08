@@ -3,8 +3,26 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import Amplify from "aws-amplify";
+import { BrowserRouter as Router } from 'react-router-dom';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+Amplify.configure({
+    API: {
+        endpoints: [
+            {
+                name: 'notes',
+                endpoint: 'https://yyosn5pkag.execute-api.us-east-1.amazonaws.com/dev'
+            }
+        ]
+    }
+});
+
+ReactDOM.render(
+    <Router>
+        <App />
+    </Router>,
+    document.getElementById('root')
+);
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

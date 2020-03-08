@@ -1,0 +1,25 @@
+.NoteContent {
+    padding: 20px;
+    width: 1000px;
+}
+
+.NoteDetails {
+    margin-bottom: 10px;
+}
+
+.NewNote {
+    height: 50vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.NewNote Button {
+    margin-top: 10px;
+}
+
+.ExpirationContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
