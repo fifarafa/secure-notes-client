@@ -1,14 +1,17 @@
 import React, {useState} from "react";
 import {API} from "aws-amplify";
-import {Button, FormControl, FormGroup, InputGroup} from "react-bootstrap";
+import {Button, FormControl, FormGroup} from "react-bootstrap";
 import './UnlockNote.css'
 import {FaLock, FaLockOpen} from "react-icons/fa";
+import {useAlert} from "react-alert";
 
 export default function UnlockNote(props) {
 
     const [secret, setSecret] = useState('');
     const [isLocked, setIsLocked] = useState(true);
     const [text, setText] = useState("");
+
+    const alert = useAlert();
 
     function getNote() {
         let apiName = 'notes';
@@ -25,16 +28,20 @@ export default function UnlockNote(props) {
     function handleUnlock() {
         console.log(props);
         getNote().then(response => {
-            console.log(response);
             setIsLocked(false);
             setText(response.text)
-            // props.history.push("/note/0594df27-d1d8-4188-a4ed-cca3aca93712", {response: response.text});
-            // if 401 then cos tam
-            // if 200 then setIsLocked(false) i ponowny renering
 
         }, error => {
-            // console.log(error.response.status);
-            // props.history.push("/");
+            switch (error.response.status) {
+                case 401:
+                    alert.error("Wrong secret. Try again.");
+                    break;
+                case 404:
+                    props.history.push("/oops");
+                    break;
+                default:
+                    alert.error("Oops! Something went wrong. Please try again.");
+            }
         })
     }
 

@@ -39,7 +39,8 @@ export default function NewNote(props) {
             console.log(response);
             props.history.push("/share", {noteId: response.id});
         }, error => {
-            console.log(error)
+            console.log(error);
+            alert.error("Oops! Something went wrong. Please try again.");
         });
     }
 
@@ -89,7 +90,6 @@ export default function NewNote(props) {
 }
 
 //TODO validate form password
-//TODO handle other statuses than 201
 //TODO loading button
 //TODO adjust layout to screen
 //TODO make UnlockNote note screen wider
