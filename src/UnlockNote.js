@@ -10,6 +10,8 @@ export default function UnlockNote(props) {
     const [secret, setSecret] = useState('');
     const [isLocked, setIsLocked] = useState(true);
     const [text, setText] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
+
 
     const alert = useAlert();
 
@@ -24,10 +26,9 @@ export default function UnlockNote(props) {
         return API.get(apiName, path, init);
     }
 
-    //TODO set button loading while waiting for response https://react-bootstrap.github.io/components/buttons/
-    function handleUnlock() {
-        console.log(props);
-        getNote().then(response => {
+    async function handleUnlock() {
+        setIsLoading(true);
+        await getNote().then(response => {
             setIsLocked(false);
             setText(response.text)
 
@@ -42,7 +43,8 @@ export default function UnlockNote(props) {
                 default:
                     alert.error("Oops! Something went wrong. Please try again.");
             }
-        })
+        });
+        setIsLoading(false);
     }
 
     return (
@@ -53,8 +55,8 @@ export default function UnlockNote(props) {
                     <FormControl type="password" placeholder="Your note secret phrase"
                                  onChange={e => setSecret(e.target.value)}
                     />
-                    <Button variant="primary" size="lg" block onClick={handleUnlock}>
-                        Unlock
+                    <Button variant="primary" size="lg" disabled={isLoading} onClick={handleUnlock}>
+                        {isLoading ? "Please wait..." : "Unlock"}
                     </Button>
                 </form>
             </div>) :
