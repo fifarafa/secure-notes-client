@@ -7,7 +7,7 @@ import {useAlert} from "react-alert";
 
 export default function UnlockNote(props) {
 
-    const [secret, setSecret] = useState('');
+    const [password, setPassword] = useState('');
     const [isLocked, setIsLocked] = useState(true);
     const [text, setText] = useState("");
     const [isLoading, setIsLoading] = useState(false);
@@ -20,7 +20,7 @@ export default function UnlockNote(props) {
         let path = '/notes/' + props.match.params.id;
         let init = {
             headers: {
-                'note-secret': secret
+                'password': password
             }
         };
         return API.get(apiName, path, init);
@@ -53,7 +53,7 @@ export default function UnlockNote(props) {
                 <FaLock size="7em"/>
                 <form>
                     <FormControl type="password" placeholder="Your note secret phrase"
-                                 onChange={e => setSecret(e.target.value)}
+                                 onChange={e => setPassword(e.target.value)}
                     />
                     <Button variant="primary" size="lg" disabled={isLoading} onClick={handleUnlock}>
                         {isLoading ? "Please wait..." : "Unlock"}
