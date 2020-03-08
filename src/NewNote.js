@@ -22,9 +22,12 @@ export default function NewNote(props) {
 
     const [text, setText] = useState("");
     const [secret, setSecret] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
     const [expirationOptionSelected, setExpirationOptionSelected] = useState(0);
 
-    function handleSave() {
+    async function handleSave() {
+        setIsLoading(true);
+
         let apiName = 'notes';
         let path = '/notes';
         let init = {
@@ -34,14 +37,16 @@ export default function NewNote(props) {
                 lifeTimeSeconds: expirationOptions[expirationOptionSelected].seconds
             }
         };
-        //TODO set button loading while waiting for response https://react-bootstrap.github.io/components/buttons/
-        API.post(apiName, path, init).then(response => {
+
+        await API.post(apiName, path, init).then(response => {
             console.log(response);
             props.history.push("/share", {noteId: response.id});
         }, error => {
             console.log(error);
             alert.error("Oops! Something went wrong. Please try again.");
         });
+
+        setIsLoading(false)
     }
 
     function handleSelect(ek, e) {
@@ -82,7 +87,9 @@ export default function NewNote(props) {
                         }
                     </DropdownButton>
 
-                    <Button variant="primary" size="lg" onClick={handleSave}>Create new note</Button>
+                    <Button variant="primary" size="lg" disabled={isLoading} onClick={!isLoading ? handleSave : null}>
+                        {isLoading ? "Creating..." : "Create new note"}
+                    </Button>
                 </FormGroup>
             </form>
         </div>
