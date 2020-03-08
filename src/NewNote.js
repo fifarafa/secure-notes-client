@@ -39,10 +39,8 @@ export default function NewNote(props) {
         };
 
         await API.post(apiName, path, init).then(response => {
-            console.log(response);
             props.history.push("/share", {noteId: response.id});
         }, error => {
-            console.log(error);
             alert.error("Oops! Something went wrong. Please try again.");
         });
 

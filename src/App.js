@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import {Route, Switch} from "react-router-dom";
 import {Navbar} from "react-bootstrap";
+import Home from "./Home";
 import UnlockNote from "./UnlockNote";
 import NewNote from "./NewNote";
 import ShareNote from "./ShareNote";
@@ -28,14 +29,6 @@ function Routes() {
             <Route path="/note/:id" exact component={UnlockNote}/>
             <Route component={NotFound}/>
         </Switch>
-    );
-}
-
-function Home() {
-    return (
-        <div>
-            <h2>Home</h2>
-        </div>
     );
 }
 
