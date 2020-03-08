@@ -68,6 +68,7 @@ export default function UnlockNote(props) {
                                 disabled="true"
                                 value={text}
                                 as="textarea"
+                                rows="5"
                                 onChange={e => setText(e.target.value)}
                             />
                         </FormGroup>

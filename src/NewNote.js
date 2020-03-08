@@ -96,7 +96,4 @@ export default function NewNote(props) {
     );
 }
 
-//TODO validate form password
-//TODO loading button
 //TODO adjust layout to screen
-//TODO make UnlockNote note screen wider
