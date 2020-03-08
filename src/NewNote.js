@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import {API} from "aws-amplify";
-import {Badge, Button, FormControl, FormGroup, DropdownButton, Dropdown } from "react-bootstrap";
+import {Badge, Button, Dropdown, DropdownButton, FormControl, FormGroup} from "react-bootstrap";
 import './NewNote.css'
 
 const expirationOptions = [
@@ -23,16 +23,6 @@ export default function NewNote(props) {
     const [text, setText] = useState("");
     const [secret, setSecret] = useState("");
     const [expirationOptionSelected, setExpirationOptionSelected] = useState(0);
-
-    useEffect(() => {
-        // setText(props.location.state.response);
-
-        // async function onLoad() {
-        // setText(props.state.response)
-        // }
-
-        // onLoad();
-    });
 
     function handleSave() {
         let apiName = 'notes';
@@ -72,9 +62,8 @@ export default function NewNote(props) {
                             rows="3"
                             onChange={e => setText(e.target.value)}
                         />
-                        {140 - text.length > 50 ?
-                            <Badge variant="light">Length limit: {140 - text.length}</Badge> :
-                            <Badge variant="danger">{140 - text.length}</Badge>}
+                        <Badge variant={140 - text.length > 50 ? "light" : "danger"}>
+                            Length limit: {140 - text.length}</Badge>
                     </div>
 
                     <FormControl type="password" placeholder="Your secret phrase"
