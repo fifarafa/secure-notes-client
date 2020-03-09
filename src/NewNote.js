@@ -36,7 +36,7 @@ export default function NewNote(props) {
                 text: text,
                 password: secret,
                 lifeTimeSeconds: expirationOptions[expirationOptionSelected].seconds,
-                oneTimeRead: isChecked
+                oneTimeRead: isOneTimeReadChecked
             }
         };
 
