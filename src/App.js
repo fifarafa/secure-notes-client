@@ -2,11 +2,11 @@ import React from 'react';
 import './App.css';
 import { Route, Switch } from "react-router-dom";
 import {Navbar} from "react-bootstrap";
-import Home from "./Home";
-import UnlockNote from "./UnlockNote";
-import NewNote from "./NewNote";
-import ShareNote from "./ShareNote";
-import NotFound from "./NotFound";
+import Home from "./containers/Home";
+import UnlockNote from "./containers/UnlockNote";
+import NewNote from "./containers/NewNote";
+import ShareNote from "./containers/ShareNote";
+import NotFound from "./containers/NotFound";
 
 
 function App() {
