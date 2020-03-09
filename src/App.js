@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {Route, Switch} from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import {Navbar} from "react-bootstrap";
 import Home from "./Home";
 import UnlockNote from "./UnlockNote";

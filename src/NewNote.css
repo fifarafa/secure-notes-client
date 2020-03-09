@@ -14,8 +14,13 @@
     align-items: center;
 }
 
-.NewNote Button {
-    margin-top: 10px;
+.NewNote .Buttons {
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.NewNote .Buttons .DropdownButton {
+    padding-right: 10px;
 }
 
 .ExpirationContainer {

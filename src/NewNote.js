@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {API} from "aws-amplify";
-import {Badge, Button, Dropdown, DropdownButton, FormControl, FormGroup} from "react-bootstrap";
+import {Badge, Button, Dropdown, DropdownButton, FormControl, FormGroup, ToggleButton, ButtonToolbar} from "react-bootstrap";
 import './NewNote.css'
 
 const expirationOptions = [
@@ -24,6 +24,7 @@ export default function NewNote(props) {
     const [secret, setSecret] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [expirationOptionSelected, setExpirationOptionSelected] = useState(0);
+    const [isOneTimeReadChecked, setIsOneTimeReadChecked] = useState(false);
 
     async function handleSave() {
         setIsLoading(true);
@@ -34,7 +35,8 @@ export default function NewNote(props) {
             body: {
                 text: text,
                 password: secret,
-                lifeTimeSeconds: expirationOptions[expirationOptionSelected].seconds
+                lifeTimeSeconds: expirationOptions[expirationOptionSelected].seconds,
+                oneTimeRead: isChecked
             }
         };
 
@@ -49,6 +51,10 @@ export default function NewNote(props) {
 
     function handleSelect(ek, e) {
         setExpirationOptionSelected(ek)
+    }
+
+    function handleCheck() {
+        isOneTimeReadChecked ? setIsOneTimeReadChecked(false) : setIsOneTimeReadChecked(true)
     }
 
     return (
@@ -74,17 +80,23 @@ export default function NewNote(props) {
                                  onChange={e => setSecret(e.target.value)}
                     />
 
-                    <DropdownButton
-                        drop="down"
-                        variant="secondary"
-                        title={'Expire in ' + expirationOptions[expirationOptionSelected].durationText}
-                    >
-                        {expirationOptions.map((o, index) => (
-                            <Dropdown.Item eventKey={index} onSelect={handleSelect}>{o.durationText}</Dropdown.Item>
-                        ))
-                        }
-                    </DropdownButton>
-
+                    <div className="Buttons">
+                        <ButtonToolbar>
+                            <DropdownButton
+                                className="DropdownButton"
+                                drop="down"
+                                variant="secondary"
+                                title={'Expire in ' + expirationOptions[expirationOptionSelected].durationText}
+                            >
+                                {expirationOptions.map((o, index) => (
+                                    <Dropdown.Item eventKey={index} onSelect={handleSelect}>{o.durationText}</Dropdown.Item>
+                                ))
+                                }
+                            </DropdownButton>
+                            <ToggleButton type="checkbox" variant="secondary" checked={isOneTimeReadChecked}
+                                          onChange={handleCheck}>  Destroy after first read</ToggleButton>
+                        </ButtonToolbar>
+                    </div>
                     <Button variant="primary" size="lg" disabled={isLoading} onClick={!isLoading ? handleSave : null}>
                         {isLoading ? "Creating..." : "Create new note"}
                     </Button>
